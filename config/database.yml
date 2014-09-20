@@ -16,10 +16,17 @@ default: &default
   username: root
   password:
   socket: /tmp/mysql.sock
+sqlite3_default: &sqlite3_default
+  adapter: sqlite3
+  pool: 5
+  timeout: 5000
 
 development:
   <<: *default
   database: nanika_development
+development_comment:
+  <<: *sqlite3_default
+  database: db/development_comment.sqlite3
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -27,6 +34,9 @@ development:
 test:
   <<: *default
   database: nanika_test
+test_comment:
+  <<: *sqlite3_default
+  database: db/test_comment.sqlite3
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -52,3 +62,6 @@ production:
   database: nanika_production
   username: nanika
   password: <%= ENV['NANIKA_DATABASE_PASSWORD'] %>
+production_comment:
+  <<: *sqlite3_default
+  database: db/production_comment.sqlite3
