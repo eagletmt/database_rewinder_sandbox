@@ -6,7 +6,7 @@ RSpec.describe Comment, :type => :model do
   end
 
   it 'case 2' do
-    p Comment.count
+    expect(Comment.count).to eq(0)
     Comment.create!
   end
 end
